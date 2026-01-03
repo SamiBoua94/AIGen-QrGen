@@ -5,16 +5,16 @@ import path from 'path';
 let db: Database | null = null;
 
 export async function getDb() {
-    if (db) return db;
+  if (db) return db;
 
-    const dbPath = path.join(process.cwd(), 'database.db');
+  const dbPath = path.join(process.cwd(), 'database.db');
 
-    db = await open({
-        filename: dbPath,
-        driver: sqlite3.Database
-    });
+  db = await open({
+    filename: dbPath,
+    driver: sqlite3.Database
+  });
 
-    await db.exec(`
+  await db.exec(`
     CREATE TABLE IF NOT EXISTS photos (
       id TEXT PRIMARY KEY,
       filename TEXT NOT NULL,
@@ -23,9 +23,25 @@ export async function getDb() {
       description TEXT,
       date TEXT NOT NULL,
       createdAt TEXT NOT NULL,
-      qrCodeData TEXT
-    )
+      qrCodeData TEXT,
+      isPublic INTEGER DEFAULT 1
+    );
+
+    CREATE TABLE IF NOT EXISTS users (
+      id TEXT PRIMARY KEY DEFAULT 'current-user',
+      firstName TEXT,
+      lastName TEXT,
+      birthDate TEXT,
+      email TEXT,
+      phone TEXT,
+      profession TEXT,
+      zipCode TEXT,
+      city TEXT,
+      country TEXT,
+      cryptoSignature TEXT,
+      updatedAt TEXT
+    );
   `);
 
-    return db;
+  return db;
 }

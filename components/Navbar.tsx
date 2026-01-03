@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Camera, Image as ImageIcon, PlusCircle, ShieldCheck } from 'lucide-react';
+import { Camera, Image as ImageIcon, PlusCircle, ShieldCheck, User, Globe, FileText } from 'lucide-react';
 
 export default function Navbar() {
     return (
@@ -10,24 +10,38 @@ export default function Navbar() {
                         <Link href="/" className="flex items-center space-x-2">
                             <ShieldCheck className="h-8 w-8 text-blue-600" />
                             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                                PhotoVerify
+                                TruStation
                             </span>
                         </Link>
                     </div>
-                    <div className="flex space-x-4">
+                    <div className="flex items-center space-x-1 sm:space-x-3">
                         <Link
                             href="/add"
-                            className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all"
+                            className="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all"
                         >
-                            <PlusCircle className="h-4 w-4" />
-                            <span>Ajouter</span>
+                            <PlusCircle className="h-4 w-4 text-blue-400 group-hover:rotate-90 transition-transform duration-300" />
+                            <span>Nouveau</span>
                         </Link>
                         <Link
                             href="/photos"
-                            className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all"
+                            className="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all"
                         >
-                            <ImageIcon className="h-4 w-4" />
-                            <span>Galerie</span>
+                            <Globe className="h-4 w-4" />
+                            <span>Registre</span>
+                        </Link>
+                        <Link
+                            href="/my-certifications"
+                            className="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all"
+                        >
+                            <FileText className="h-4 w-4" />
+                            <span>Mes Certifications</span>
+                        </Link>
+                        <Link
+                            href="/account"
+                            className="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all"
+                        >
+                            <User className="h-4 w-4" />
+                            <span>Compte</span>
                         </Link>
                     </div>
                 </div>

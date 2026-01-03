@@ -6,8 +6,8 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PhotoVerify - Vérification par QR Code",
-  description: "Sécurisez vos photos avec une vérification instantanée",
+  title: "TruStation - Certification Numérique",
+  description: "Registre immuable de certificats et preuves d'authenticité",
 };
 
 export default function RootLayout({

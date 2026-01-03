@@ -4,10 +4,10 @@ import { getDb } from '@/lib/database';
 export async function GET() {
     try {
         const db = await getDb();
-        const photos = await db.all('SELECT * FROM photos WHERE isPublic = 1 ORDER BY createdAt DESC');
+        const photos = await db.all('SELECT * FROM photos ORDER BY createdAt DESC');
         return NextResponse.json(photos);
     } catch (error) {
-        console.error('Error fetching photos:', error);
+        console.error('Error fetching my certifications:', error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

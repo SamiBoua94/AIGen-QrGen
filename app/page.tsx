@@ -6,13 +6,13 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center space-y-12 py-10">
       <div className="text-center space-y-4">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl">
-          Sécurisez vos photos avec{' '}
+          Certifiez vos actifs avec{' '}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-            QR Code
+            TruStation
           </span>
         </h1>
         <p className="max-w-2xl text-xl text-gray-500 mx-auto">
-          Téléchargez vos images, générez des QR codes de vérification uniques et partagez la preuve d'authenticité en un clic.
+          Générez des certificats numériques immuables et prouvez l'authenticité de vos documents en un instant.
         </p>
       </div>
 
@@ -22,14 +22,14 @@ export default function Home() {
           className="group relative flex flex-col items-center p-8 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-500 transition-all duration-300 overflow-hidden"
         >
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Plus className="w-24 h-24 text-blue-600 -rotate-12" />
+            <ShieldCheck className="w-24 h-24 text-blue-600 -rotate-12" />
           </div>
           <div className="bg-blue-100 p-4 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-            <Camera className="h-8 w-8 text-blue-600" />
+            <Zap className="h-8 w-8 text-blue-600" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">Ajouter une Photo</h2>
+          <h2 className="text-2xl font-bold mb-2">Créer un Certificat</h2>
           <p className="text-gray-500 text-center">
-            Téléchargez une image et obtenez instantanément son QR code de vérification.
+            Émettez une preuve d'authenticité numérique pour n'importe quel actif.
           </p>
         </Link>
 
@@ -41,11 +41,11 @@ export default function Home() {
             <List className="w-24 h-24 text-indigo-600 rotate-12" />
           </div>
           <div className="bg-indigo-100 p-4 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-            <List className="h-8 w-8 text-indigo-600" />
+            <ShieldCheck className="h-8 w-8 text-indigo-600" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">Toutes les Photos</h2>
+          <h2 className="text-2xl font-bold mb-2">Registre des Preuves</h2>
           <p className="text-gray-500 text-center">
-            Consultez votre galerie, téléchargez les QR codes et gérez vos entrées.
+            Consultez votre registre immuable et gérez vos certificats émis.
           </p>
         </Link>
       </div>

@@ -21,3 +21,19 @@ model Photo {
   qrCodeData   String?  // données encodées du QR
 }
 
+model User {
+  id               String   @id @default("current-user") // Single user for local app
+  firstName        String?
+  lastName         String?
+  birthDate        String?
+  email            String?
+  phone            String?
+  profession       String?
+  zipCode          String?
+  city             String?
+  country          String?
+  cryptoSignature  String?
+  updatedAt        DateTime @updatedAt
+}
+
+

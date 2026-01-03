@@ -62,7 +62,7 @@ export default function VerifyPage({ params }: { params: Promise<{ id: string }>
                 </div>
                 <div className="space-y-2">
                     <h1 className="text-3xl font-bold text-gray-900 italic">Oups !</h1>
-                    <p className="text-gray-500 max-w-sm">{error || "Nous n'avons pas pu trouver la photo associée à ce QR code."}</p>
+                    <p className="text-gray-500 max-w-sm">{error || "Nous n'avons pas pu trouver le certificat associé à ce QR code."}</p>
                 </div>
                 <Link
                     href="/"
@@ -171,8 +171,8 @@ export default function VerifyPage({ params }: { params: Promise<{ id: string }>
             </div>
 
             <footer className="text-center text-gray-400 text-xs">
-                Document sécurisé par PhotoVerify Technologie. <br />
-                L'authenticité de cette image a été confirmée numériquement.
+                Document sécurisé par TruStation Technologie. <br />
+                L'authenticité de cette preuve a été confirmée numériquement.
             </footer>
         </div>
     );

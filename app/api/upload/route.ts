@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
         const title = formData.get('title') as string || null;
         const description = formData.get('description') as string || null;
         const date = formData.get('date') as string || new Date().toISOString();
+        const isPublic = formData.get('isPublic') === '0' ? 0 : 1;
 
         if (!file) {
             return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
@@ -30,9 +31,9 @@ export async function POST(req: NextRequest) {
         const createdAt = new Date().toISOString();
 
         await db.run(
-            `INSERT INTO photos (id, filename, originalName, title, description, date, createdAt, qrCodeData)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [id, filename, file.name, title, description, date, createdAt, qrCodeData]
+            `INSERT INTO photos (id, filename, originalName, title, description, date, createdAt, qrCodeData, isPublic)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [id, filename, file.name, title, description, date, createdAt, qrCodeData, isPublic]
         );
 
         return NextResponse.json({

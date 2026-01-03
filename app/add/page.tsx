@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Upload, X, Loader2, QrCode, Copy, Download, CheckCircle2 } from 'lucide-react';
+import { Upload, X, Loader2, QrCode, Copy, Download, CheckCircle2, ShieldCheck, Globe, Lock } from 'lucide-react';
 import Image from 'next/image';
 
 export default function AddPhotoPage() {
@@ -11,6 +11,7 @@ export default function AddPhotoPage() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    const [isPublic, setIsPublic] = useState(true);
     const [isUploading, setIsUploading] = useState(false);
     const [result, setResult] = useState<{ id: string; qrCodeData: string; verifyUrl: string } | null>(null);
     const [copied, setCopied] = useState(false);
@@ -46,6 +47,7 @@ export default function AddPhotoPage() {
         formData.append('title', title);
         formData.append('description', description);
         formData.append('date', new Date(date).toISOString());
+        formData.append('isPublic', isPublic ? '1' : '0');
 
         try {
             const response = await fetch('/api/upload', {
@@ -95,7 +97,7 @@ export default function AddPhotoPage() {
                             <CheckCircle2 className="h-12 w-12 text-green-600" />
                         </div>
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-900">Photo ajoutée avec succès !</h1>
+                    <h1 className="text-3xl font-bold text-gray-900">Certificat émis avec succès !</h1>
 
                     <div className="flex flex-col items-center space-y-4 p-6 bg-slate-50 rounded-2xl border border-slate-100">
                         <Image
@@ -137,13 +139,13 @@ export default function AddPhotoPage() {
                             onClick={() => setResult(null)}
                             className="flex-1 py-3 px-6 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors font-semibold"
                         >
-                            Ajouter une autre
+                            Nouveau Certificat
                         </button>
                         <button
                             onClick={() => router.push('/photos')}
                             className="flex-1 py-3 px-6 bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-colors font-semibold"
                         >
-                            Voir la galerie
+                            Voir le Registre
                         </button>
                     </div>
                 </div>
@@ -154,8 +156,8 @@ export default function AddPhotoPage() {
     return (
         <div className="max-w-3xl mx-auto space-y-8">
             <div className="text-center space-y-2">
-                <h1 className="text-4xl font-bold text-gray-900 italic">Ajouter une Photo</h1>
-                <p className="text-gray-500">Remplissez les informations pour générer un lien de vérification.</p>
+                <h1 className="text-4xl font-bold text-gray-900 italic">Émettre un Certificat</h1>
+                <p className="text-gray-500">Générez une preuve d'authenticité infalsifiable pour vos documents.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 space-y-8">
@@ -181,7 +183,7 @@ export default function AddPhotoPage() {
                                     <Upload className="h-8 w-8 text-gray-400 group-hover:text-blue-600" />
                                 </div>
                                 <div>
-                                    <p className="text-lg font-semibold text-gray-700">Cliquez pour choisir une photo</p>
+                                    <p className="text-lg font-semibold text-gray-700">Importer le document à certifier</p>
                                     <p className="text-sm text-gray-500">ou glissez-déposez le fichier ici</p>
                                 </div>
                                 <p className="text-xs text-gray-400">PNG, JPG, JPEG jusqu'à 10MB</p>
@@ -248,6 +250,36 @@ export default function AddPhotoPage() {
                     </div>
                 </div>
 
+                {/* Privacy Toggle */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <div className="space-y-0.5">
+                        <label className="text-sm font-bold text-gray-700 uppercase tracking-widest">
+                            Statut de Visibilité
+                        </label>
+                        <p className="text-xs text-gray-400 italic">
+                            {isPublic ? "Visible par tous dans le Registre Public." : "Visible uniquement dans vos certifications personnelles."}
+                        </p>
+                    </div>
+                    <div className="flex bg-slate-100 p-1 rounded-xl">
+                        <button
+                            type="button"
+                            onClick={() => setIsPublic(true)}
+                            className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${isPublic ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                        >
+                            <Globe className="h-4 w-4 inline mr-2" />
+                            Public
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setIsPublic(false)}
+                            className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${!isPublic ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                        >
+                            <Lock className="h-4 w-4 inline mr-2" />
+                            Privé
+                        </button>
+                    </div>
+                </div>
+
                 <button
                     type="submit"
                     disabled={!file || isUploading}
@@ -260,8 +292,8 @@ export default function AddPhotoPage() {
                         </div>
                     ) : (
                         <div className="flex items-center justify-center space-y-1">
-                            <QrCode className="h-6 w-6 mr-2" />
-                            <span>Générer le QR Code & Lien</span>
+                            <ShieldCheck className="h-6 w-6 mr-2" />
+                            <span>Certifier le Document</span>
                         </div>
                     )}
                 </button>
