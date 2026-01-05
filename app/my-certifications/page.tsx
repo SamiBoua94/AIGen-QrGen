@@ -16,6 +16,7 @@ interface Photo {
     date: string;
     createdAt: string;
     isPublic: number;
+    qrCodeData: string | null;
 }
 
 interface UserProfile {
@@ -150,6 +151,22 @@ export default function MyCertificationsPage() {
                                         <div className="space-y-1">
                                             <p className="text-[10px] font-black text-blue-600 tracking-tighter uppercase">Signature Créateur</p>
                                             <p className="text-[11px] text-slate-400">TruStation ID Authenticated</p>
+                                        </div>
+                                    </div>
+                                    {/* Certificate QR - Lien de vérification */}
+                                    <div className="flex items-center space-x-4">
+                                        <div className="p-2 border bg-white rounded-xl shadow-sm">
+                                            {photo.qrCodeData ? (
+                                                <Image src={photo.qrCodeData} alt="Certificate QR" width={70} height={70} />
+                                            ) : (
+                                                <div className="h-[70px] w-[70px] bg-slate-50 flex items-center justify-center">
+                                                    <QrCode className="h-8 w-8 text-slate-300" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-[10px] font-black text-green-600 tracking-tighter uppercase">QR Vérification</p>
+                                            <p className="text-[11px] text-slate-400">Lien d'authenticité</p>
                                         </div>
                                     </div>
                                 </div>

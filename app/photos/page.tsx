@@ -15,6 +15,7 @@ interface Photo {
     description: string | null;
     date: string;
     createdAt: string;
+    qrCodeData: string | null;
 }
 
 interface UserProfile {
@@ -186,14 +187,20 @@ export default function PhotosPage() {
                                         </div>
                                     </div>
 
-                                    {/* 2. Client QR (Placeholder) */}
-                                    <div className="flex items-center space-x-4 opacity-40">
-                                        <div className="p-2 border border-dashed border-slate-300 bg-slate-50 rounded-xl">
-                                            <QrCode className="h-[70px] w-[70px] text-slate-200" strokeWidth={1} />
+                                    {/* 2. Certificate QR - Lien de vérification */}
+                                    <div className="flex items-center space-x-4">
+                                        <div className="p-2 border bg-white rounded-xl shadow-sm">
+                                            {photo.qrCodeData ? (
+                                                <Image src={photo.qrCodeData} alt="Certificate QR" width={70} height={70} />
+                                            ) : (
+                                                <div className="h-[70px] w-[70px] bg-slate-50 flex items-center justify-center">
+                                                    <QrCode className="h-8 w-8 text-slate-300" />
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="space-y-1">
-                                            <p className="text-[10px] font-black text-slate-400 tracking-tighter uppercase">Clé Client</p>
-                                            <p className="text-[11px] text-slate-400 leading-tight italic">En attente de signature...</p>
+                                            <p className="text-[10px] font-black text-green-600 tracking-tighter uppercase">QR Vérification</p>
+                                            <p className="text-[11px] text-slate-400 leading-tight">Lien d'authenticité</p>
                                         </div>
                                     </div>
 
